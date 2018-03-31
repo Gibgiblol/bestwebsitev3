@@ -22,6 +22,31 @@
   font-size: large;
 }
 
+.stockImages {
+  max-width: 50%;
+}
+
+.dropdown1 {
+  background-color: lightgrey;
+}
+
+.dropdown2 {
+  
+}
+
+.dropdown3 {
+  background-color: lightgrey;
+}
+
+th {
+  cursor: pointer;
+}
+
+td {
+  text-align: center;
+  vertical-align: middle;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

@@ -1,0 +1,71 @@
+symbol,name,SEC,sector,subIndustry,address,dateAdded,CIK,frequency
+MMM,3M Company,reports,Industrials,Industrial Conglomerates,"St. Paul, Minnesota",,66740,8
+ABT,Abbott Laboratories,reports,Health Care,Health Care Equipment,"North Chicago, Illinois",3/31/1964,1800,5
+ACN,Accenture plc,reports,Information Technology,IT Consulting & Other Services,"Dublin, Ireland",7/6/2011,1467373,7
+ATVI,Activision Blizzard,reports,Information Technology,Home Entertainment Software,"Santa Monica, California",8/31/2015,718877,11
+AYI,Acuity Brands Inc,reports,Industrials,Electrical Components & Equipment,"Atlanta, Georgia",5/3/2016,1144215,7
+ADBE,Adobe Systems Inc,reports,Information Technology,Application Software,"San Jose, California",5/5/1997,796343,14
+AAP,Advance Auto Parts,reports,Consumer Discretionary,Automotive Retail,"Roanoke, Virginia",7/9/2015,1158449,2
+AES,AES Corp,reports,Utilities,Independent Power Producers & Energy Traders,"Arlington, Virginia",,874761,5
+AFL,AFLAC Inc,reports,Financials,Life & Health Insurance,"Columbus, Georgia",,4977,2
+A,Agilent Technologies Inc,reports,Health Care,Health Care Equipment,"Santa Clara, California",,1090872,10
+AKAM,Akamai Technologies Inc,reports,Information Technology,Internet Software & Services,"Cambridge, Massachusetts",7/12/2007,1086222,8
+ALXN,Alexion Pharmaceuticals,reports,Health Care,Biotechnology,"Cheshire, Connecticut",5/25/2012,899866,5
+ADS,Alliance Data Systems,reports,Information Technology,Data Processing & Outsourced Services,"Plano, Texas",12/23/2013,1101215,1
+ALL,Allstate Corp,reports,Financials,Property & Casualty Insurance,"Northfield Township, Illinois",,899051,3
+GOOGL,Alphabet Inc Class A,reports,Information Technology,Internet Software & Services,"Mountain View, California",4/3/2014,1652044,40
+GOOG,Alphabet Inc Class C,reports,Information Technology,Internet Software & Services,"Mountain View, California",,1652044,14
+MO,Altria Group Inc,reports,Consumer Staples,Tobacco,"Richmond, Virginia",,764180,6
+AMZN,Amazon.com Inc,reports,Consumer Discretionary,Internet & Direct Marketing Retail,"Seattle, Washington",11/18/2005,1018724,31
+AEP,American Electric Power,reports,Utilities,Electric Utilities,"Columbus, Ohio",,4904,8
+AXP,American Express Co,reports,Financials,Consumer Finance,"New York, New York",6/30/1976,4962,5
+AIG,"American International Group, Inc.",reports,Financials,Property & Casualty Insurance,"New York, New York",3/31/1980,5272,10
+AMT,American Tower Corp A,reports,Real Estate,Specialized REITs,"Boston, Massachusetts",11/19/2007,1053507,3
+AWK,American Water Works Company Inc,reports,Utilities,Water Utilities,"Voorhees, New Jersey",3/4/2016,1410636,7
+ABC,AmerisourceBergen Corp,reports,Health Care,Health Care Distributors,"Chesterbrook, Pennsylvania",,1140859,5
+AME,AMETEK Inc,reports,Industrials,Electrical Components & Equipment,"Berwyn, Pennsylvania",9/23/2013,1037868,1
+AMGN,Amgen Inc,reports,Health Care,Biotechnology,"Thousand Oaks, California",1/2/1992,318154,6
+APH,Amphenol Corp,reports,Information Technology,Electronic Components,"Wallingford, Connecticut",9/30/2008,820313,1
+APC,Anadarko Petroleum Corp,reports,Energy,Oil & Gas Exploration & Production,"The Woodlands, Texas",,773910,10
+ADI,"Analog Devices, Inc.",reports,Information Technology,Semiconductors,"Norwood, Massachusetts",,6281,2
+AON,Aon plc,reports,Financials,Insurance Brokers,"London, United Kingdom",,315293,2
+APA,Apache Corporation,reports,Energy,Oil & Gas Exploration & Production,"Houston, Texas",,6769,9
+AAPL,Apple Inc.,reports,Information Technology,Computer Hardware,"Cupertino, California",11/30/1982,320193,43
+AMAT,Applied Materials Inc,reports,Information Technology,Semiconductor Equipment,"Santa Clara, California",,6951,6
+ADM,Archer-Daniels-Midland Co,reports,Consumer Staples,Agricultural Products,"Decatur, Illinois",7/29/1981,7084,6
+AJG,Arthur J. Gallagher & Co.,reports,Financials,Insurance Brokers,"Itasca, Illinois",5/31/2016,354190,4
+AIZ,Assurant Inc,reports,Financials,Multi-line Insurance,"New York, New York",4/10/2007,1267238,9
+T,AT&T Inc,reports,Telecommunications Services,Integrated Telecommunications Services,"Dallas, Texas",11/30/1983,732717,23
+ADP,Automatic Data Processing,reports,Information Technology,Internet Software & Services,"Roseland, New Jersey",3/31/1981,8670,1
+BAC,Bank of America Corp,reports,Financials,Banks,"Charlotte, North Carolina",6/30/1976,70858,16
+BAX,Baxter International Inc.,reports,Health Care,Health Care Equipment,"Deerfield, Illinois",9/30/1972,10456,7
+BBT,BB&T Corporation,reports,Financials,Banks,"Winston-Salem, North Carolina",,92230,7
+BRK.B,Berkshire Hathaway,reports,Financials,Multi-Sector Holdings,"Omaha, Nebraska",2/16/2010,1067983,19
+BBY,Best Buy Co. Inc.,reports,Consumer Discretionary,Computer & Electronics Retail,"Richfield, Minnesota",,764478,3
+BIIB,BIOGEN IDEC Inc.,reports,Health Care,Biotechnology,"Weston, Massachusetts",,875045,8
+BLK,BlackRock,reports,Financials,Asset Management & Custody Banks,"New York, New York",4/4/2011,1364742,3
+BA,Boeing Company,reports,Industrials,Aerospace & Defense,"Chicago, Illinois",,12927,5
+BWA,BorgWarner,reports,Consumer Discretionary,Auto Parts & Equipment,"Auburn Hills, Michigan",12/19/2011,908255,3
+BMY,Bristol-Myers Squibb,reports,Health Care,Health Care Distributors,"New York, New York",,14272,9
+AVGO,Broadcom,reports,Information Technology,Semiconductors,"San Jose, California",5/8/2014,1441634,3
+BF.B,Brown-Forman Corporation,reports,Consumer Staples,Distillers & Vintners,"Louisville, Kentucky",10/31/1982,14693,2
+CA,"CA, Inc.",reports,Information Technology,Systems Software,"Islandia, New York",7/31/1987,356028,4
+CPB,Campbell Soup,reports,Consumer Staples,Packaged Foods & Meats,"Camden, New Jersey",,16732,4
+COF,Capital One Financial,reports,Financials,Consumer Finance,"Tysons Corner, Virginia",,927628,2
+CAH,Cardinal Health Inc.,reports,Health Care,Health Care Distributors,"Dublin, Ohio",,721371,8
+KMX,Carmax Inc,reports,Consumer Discretionary,Specialty Stores,"Richmond, Virginia",6/28/2010,1170010,9
+CCL,Carnival Corp.,reports,Consumer Discretionary,"Hotels, Resorts & Cruise Lines","Miami, Florida",,815097,7
+CAT,Caterpillar Inc.,reports,Industrials,Construction & Farm Machinery & Heavy Trucks,"Peoria, Illinois",,18230,8
+CBG,CBRE Group,reports,Real Estate,Real Estate Services,"Los Angeles, California",,1138118,3
+CBS,CBS Corp.,reports,Consumer Discretionary,Broadcasting & Cable TV,"New York, New York",9/1/1994,813828,7
+CNP,CenterPoint Energy,reports,Utilities,MultiUtilities,"Houston, Texas",7/31/1985,1130310,2
+CHTR,Charter Communications,reports,Consumer Discretionary,Cable & Satellite,"Stamford, Connecticut",9/8/2016,1091667,6
+CVX,Chevron Corp.,reports,Energy,Integrated Oil & Gas,"San Ramon, California",,93410,18
+CMG,Chipotle Mexican Grill,reports,Consumer Discretionary,Restaurants,"Denver, Colorado",4/28/2011,1058090,9
+CB,Chubb Limited,reports,Financials,Property & Casualty Insurance,"Zurich, Switzerland",7/15/2010,896159,4
+CHD,Church & Dwight,reports,Consumer Staples,Household Products,"Ewing, New Jersey",12/29/2015,313927,5
+CI,CIGNA Corp.,reports,Health Care,Managed Health Care,"Philadelphia, Pennsylvania",6/30/1976,701221,1
+CTAS,Cintas Corporation,reports,Industrials,Diversified Support Services,"Mason, Ohio",,723254,4
+CSCO,Cisco Systems,reports,Information Technology,Networking Equipment,"San Jose, California",12/1/1993,858877,22
+C,Citigroup Inc.,reports,Financials,Banks,"New York, New York",5/31/1988,831001,18
+CTXS,Citrix Systems,reports,Information Technology,Internet Software & Services,"Fort Lauderdale, Florida",,877890,7
