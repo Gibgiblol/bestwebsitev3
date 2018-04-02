@@ -1,35 +1,37 @@
 import React, { Component } from 'react';
 import { NavLink } from "react-router-dom";
-import stocks from "../data/stocks.json";
+import axios from 'axios';
 
 class SingleStock extends Component {
     
  constructor(props) {
     super(props);
     this.state = {
-        singleStockArray: []
+        company: []
     }
  }
  
  componentDidMount() {
     let stockCompare = this.props.match.params.symbol;
-    let singleStock = [];
-        stocks.forEach(function(stocks) {
-            if(stocks.symbol === stockCompare) {
-                singleStock = stocks;
-            }
+
+        axios.get('https://bestdatabasev2.herokuapp.com/api/company/'+stockCompare).then(response => { 
+            this.setState({company: response.data});
+            
         })
-    console.log(singleStock);
-    this.setState({ singleStockArray: singleStock })
-     
+        .catch(function (error) {
+            alert('Error with api call ... error=' + error);
+        });
+    
+    
+    
  }
  
  render() {
         
-    if (! this.state.singleStockArray || this.state.singleStockArray.length === 0) {
+    if (! this.state.company || this.state.company.length === 0) {
         return null;
     } else {   
-        
+        console.log(this.state.company);
         
         return (
             /*breadcrumb layout taken from bulma framework website*/
@@ -44,16 +46,16 @@ class SingleStock extends Component {
             
                 <div className="card">
                     <header className="card-header">
-                        <p className="card-header-title">{this.state.singleStockArray.name}</p>
+                        <p className="card-header-title">{this.state.company[0].name}</p>
                     </header>
                     <div className="card-content">
                         <article className="message">
                             <div className="message-body">
-                                <img src={"/logos/" + this.state.singleStockArray.symbol + ".svg"} alt=""></img><br/>
-                                <strong>Symbol: </strong> {this.state.singleStockArray.symbol} <br/>
-                                <strong>Sector: </strong> {this.state.singleStockArray.sector} <br/>
-                                <strong>Sub-Industry: </strong> {this.state.singleStockArray.subIndustry} <br/>
-                                <strong>Address: </strong> {this.state.singleStockArray.address} <br/>
+                                <img src={"/logos/" + this.state.company[0].symbol + ".svg"} alt=""></img><br/>
+                                <strong>Symbol: </strong> {this.state.company[0].symbol} <br/>
+                                <strong>Sector: </strong> {this.state.company[0].sector} <br/>
+                                <strong>Sub-Industry: </strong> {this.state.company[0].subIndustry} <br/>
+                                <strong>Address: </strong> {this.state.company[0].address} <br/>
                             </div>
                         </article>
                         
