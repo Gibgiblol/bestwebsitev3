@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from "react-router-dom";
 import axios from 'axios';
 import {BarChart} from 'react-easy-chart';
+import Dimensions from 'react-dimensions';
 
 class SingleStock extends Component {
     
@@ -65,8 +66,8 @@ class SingleStock extends Component {
                             colorBars
                             axes
                             grid
-                            width={1000}
-                            height={500}
+                            width={this.props.containerWidth}
+                            height={this.props.containerWidth/2}
                             xTickNumber={5}
                             yTickNumber={5}
                             
@@ -108,4 +109,4 @@ class SingleStock extends Component {
  }
 }
 
-export default SingleStock;
+export default Dimensions()(SingleStock);
