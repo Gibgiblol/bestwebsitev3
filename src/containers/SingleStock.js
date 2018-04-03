@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { NavLink } from "react-router-dom";
 import axios from 'axios';
-import {BarChart} from 'react-easy-chart';
-import Dimensions from 'react-dimensions';
+import StockSummary from "./StockSummary.js";
+import StockList from "./StockList.js";
+import { NavLink } from "react-router-dom";
 
 class SingleStock extends Component {
     
@@ -10,12 +10,17 @@ class SingleStock extends Component {
     super(props);
     this.state = {
         company: [],
-        companyMonthly: []
+        summaryActive: true,
+        summaryClass: "is-active",
+        listActive: false,
+        listClass: ""
     }
+    this.summaryActive = this.summaryActive.bind(this);
+    this.listActive = this.listActive.bind(this);
  }
  
  componentDidMount() {
-    let stockCompare = this.props.match.params.symbol;
+   let stockCompare = this.props.match.params.symbol;
 
         axios.get('https://bestdatabasev2.herokuapp.com/api/company/'+stockCompare).then(response => { 
             this.setState({company: response.data});
@@ -25,7 +30,7 @@ class SingleStock extends Component {
             alert('Error with api call ... error=' + error);
         });
      
-     axios.get('https://bestdatabasev2.herokuapp.com/api/price/'+stockCompare).then(response => { 
+          axios.get('https://bestdatabasev2.herokuapp.com/api/price/'+stockCompare).then(response => { 
             this.setState({companyMonthly: response.data});
             console.log(this.state.companyMonthly);
             
@@ -33,17 +38,39 @@ class SingleStock extends Component {
         .catch(function (error) {
             alert('Error with api call ... error=' + error);
         });
-    
-    
-    
  }
  
+ summaryActive() {
+     
+     if(this.state.summaryActive === false) {
+         
+         this.setState({ 
+             summaryActive: true,
+             summaryClass: "is-active",
+             listActive: false,
+             listClass: ""
+         })
+     }
+ }
+ 
+ listActive() {
+     
+     if(this.state.listActive === false) {
+         
+         this.setState({
+             summaryActive: false,
+             summaryClass: "",
+             listActive: true,
+             listClass: "is-active"
+         })
+     } 
+ }
+
  render() {
-        
-    if (! this.state.companyMonthly || this.state.companyMonthly.length === 0) {
+    
+    if (!this.state.companyMonthly || this.state.companyMonthly.length === 0) {
         return null;
-    } else {   
-        console.log(this.state.company);
+    } else { 
         
         return (
             /*breadcrumb layout taken from bulma framework website*/
@@ -56,52 +83,31 @@ class SingleStock extends Component {
                   </ul>
                 </nav>
                 
-                <div className="card">
-                    <header className="card-header">
-                        <p className="card-header-title">{this.state.company[0].name}</p>
-                    </header>
-                    <div style={{display: 'inline-block'}}>
-                    <h4>Monthly Closing Values</h4>
-                        <BarChart
-                            colorBars
-                            axes
-                            grid
-                            width={this.props.containerWidth}
-                            height={this.props.containerWidth/2}
-                            xTickNumber={5}
-                            yTickNumber={5}
-                            
-                            data={[
-                              {x: 'Jan', y: this.state.companyMonthly[1]},
-                              {x: 'Feb', y: this.state.companyMonthly[2]},
-                              {x: 'Mar', y: this.state.companyMonthly[3]},
-                              {x: 'Apr', y: this.state.companyMonthly[4]},
-                              {x: 'May', y: this.state.companyMonthly[5]},
-                              {x: 'Jun', y: this.state.companyMonthly[6]},
-                              {x: 'Jul', y: this.state.companyMonthly[7]},
-                              {x: 'Aug', y: this.state.companyMonthly[8]},
-                              {x: 'Sep', y: this.state.companyMonthly[9]},
-                              {x: 'Oct', y: this.state.companyMonthly[10]},
-                              {x: 'Nov', y: this.state.companyMonthly[11]},
-                              {x: 'Dec', y: this.state.companyMonthly[12]}
-                            ]}
-                          />
-                    </div>
+                <h3 className="title is-3">{this.state.company.name}</h3>
             
-                    <div className="card-content">
-                        <article className="message">
-                            <div className="message-body">
-                                <img src={"/logos/" + this.state.company[0].symbol + ".svg"} alt=""></img><br/>
-                                <strong>Symbol: </strong> {this.state.company[0].symbol} <br/>
-                                <strong>Sector: </strong> {this.state.company[0].sector} <br/>
-                                <strong>Sub-Industry: </strong> {this.state.company[0].subindustry} <br/>
-                                <strong>Address: </strong> {this.state.company[0].address} <br/>
-                            </div>
-                        </article>
-                        
-                    </div>
-                </div>  
-            </div>
+                <div className="tabs is-toggle is-fullwidth">
+                  <ul>
+                    <li className={this.state.summaryClass} onClick={this.summaryActive}>
+                      <a>
+                        <span>Summary</span>
+                      </a>
+                    </li>
+                    <li className={this.state.listClass} onClick={this.listActive}>
+                      <a>
+                        <span>List</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                
+                { this.state.summaryActive && (
+                    <StockSummary company={this.state.company} companyMonthly={this.state.companyMonthly} />
+                )}
+                { this.state.listActive && (
+                    <StockList />
+                )}
+                
+            </div>    
             
             
         );
@@ -109,4 +115,4 @@ class SingleStock extends Component {
  }
 }
 
-export default Dimensions()(SingleStock);
+export default SingleStock;
