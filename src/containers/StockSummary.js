@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {BarChart} from 'react-easy-chart';
 import Dimensions from 'react-dimensions';
+//Dimensions plugin from https://github.com/digidem/react-dimensions
+//Chart plugin from https://rma-consulting.github.io/react-easy-chart/
 
 class StockSummary extends Component {
     

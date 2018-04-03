@@ -10,6 +10,8 @@ class SingleStock extends Component {
     super(props);
     this.state = {
         company: [],
+        companyMonthly: [],
+        companySymbol: "",
         summaryActive: true,
         summaryClass: "is-active",
         listActive: false,
@@ -20,8 +22,8 @@ class SingleStock extends Component {
  }
  
  componentDidMount() {
-   let stockCompare = this.props.match.params.symbol;
-
+   var stockCompare = this.props.match.params.symbol;
+    this.setState({companySymbol: stockCompare});
         axios.get('https://bestdatabasev2.herokuapp.com/api/company/'+stockCompare).then(response => { 
             this.setState({company: response.data});
             console.log(this.state.company);
@@ -104,7 +106,7 @@ class SingleStock extends Component {
                     <StockSummary company={this.state.company} companyMonthly={this.state.companyMonthly} />
                 )}
                 { this.state.listActive && (
-                    <StockList />
+                    <StockList companySymbol={this.state.companySymbol} />
                 )}
                 
             </div>    
