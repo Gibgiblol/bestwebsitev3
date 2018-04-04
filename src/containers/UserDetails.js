@@ -26,17 +26,9 @@ componentDidMount() {
          tempStock += this.state.users[x].owned;  
            
          axios.get('https://bestdatabasev2.herokuapp.com/api/latestprice/' + this.state.users[x].symbol).then(response => {
-            if (x + 1 ==  this.state.users.length) {
-                tempPrice += (response.data[0].close * this.state.users[x].owned); 
-                
-                this.setState({totalWorth: tempPrice});  
-            }
-             else {
-                 tempPrice += (response.data[0].close * this.state.users[x].owned);   
-             }
-            
-             
-             
+        
+                 tempPrice += (response.data[0].close * this.state.users[x].owned);
+                 this.setState({totalWorth: tempPrice});      
         })
         .catch(function (error) {
             alert('Error with api call ... error=' + error);
@@ -49,15 +41,11 @@ componentDidMount() {
 }
  
  render() {
-     if (!this.state.totalWorth) {
+     if (!this.state.usersSummary || this.state.usersSummary.length === 0) {
         return null;
-    } else { 
-        
-       console.log(this.state.totalStocks);
-       console.log(this.state.totalWorth);
-        
+    } else {         
          
-     }
+     
         
         return (
             
@@ -67,7 +55,7 @@ componentDidMount() {
                             <div className="message-body">
                                 <strong>Total Number of Companies: </strong> {this.state.users.length} <br/>
                                 <strong>Total Number of Stocks: </strong> {this.state.totalStocks} <br/>
-                                <strong>Current Worth: </strong> ${this.state.totalWorth} <br/>
+                                <strong>Current Worth: </strong> ${this.state.totalWorth.toFixed(2)} <br/>
                             </div>
                         </article>
                     </div>
@@ -81,6 +69,7 @@ componentDidMount() {
                       />
                 </div>
         );
+    }
     
     }
  }
