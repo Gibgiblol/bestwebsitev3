@@ -11,7 +11,8 @@ class UserDetails extends Component {
         users: this.props.users,
         usersSummary: this.props.usersSummary,
         totalStocks: 0,
-        totalWorth: 0
+        totalWorth: 0,
+        
     };
     
  }
@@ -39,6 +40,8 @@ componentDidMount() {
     this.setState({totalStocks: tempStock}); 
     
 }
+    
+
  
  render() {
      if (!this.state.usersSummary || this.state.usersSummary.length === 0) {
@@ -65,8 +68,14 @@ componentDidMount() {
                         width={this.props.containerWidth * 0.8}
                         height={this.props.containerWidth * 0.8/2}
                         data={this.state.usersSummary}
+                       clickHandler={
+          (d) => this.setState({
+            dataDisplay: `The value of ${d.data.key} is ${d.value}`
+          })
+        }
                         
                       />
+        {this.state.dataDisplay ? this.state.dataDisplay : 'Click on a segment to show the value'}
                 </div>
         );
     }

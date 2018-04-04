@@ -11,6 +11,8 @@ class SingleUser extends Component {
     this.state = {
         users: [],
         usersSummary: [],
+        usersPortfolio: [],
+        listInfo: [],
         detailsActive: true,
         detailsClass: "is-active",
         portfolioActive: false,
@@ -21,9 +23,36 @@ class SingleUser extends Component {
  }
  
  componentDidMount() {
+      let userPortfolio = [];
+     
     // Here we are using the Axios to retrieve all the user info needed for summary
     axios.get('https://bestdatabasev2.herokuapp.com/api/portfolio/' + this.props.match.params.id).then(response => {
             this.setState({users: response.data});
+                //Axios call first to get company info (name and symbol)
+        response.data.forEach(function(filteredStockPortfolio) {
+            axios.get('https://bestdatabasev2.herokuapp.com/api/company/' + filteredStockPortfolio.symbol).then(response1 => {
+                //Axios call again to get latest price based on symbol
+                axios.get('https://bestdatabasev2.herokuapp.com/api/latestprice/' + filteredStockPortfolio.symbol).then(response2 => {
+                //Push everything into a stock array
+                 userPortfolio.push({ symbol: response1.data[0].symbol,
+                                      name: response1.data[0].name,
+                                      amount: filteredStockPortfolio.owned,
+                                      value: response2.data[0].close * filteredStockPortfolio.owned
+                    });   
+                    
+        })
+        .catch(function (error) {
+            alert('Error1 with api call ... error=' + error);
+        });            
+        })
+        .catch(function (error) {
+            alert('Error2 with api call ... error=' + error);
+            });
+        });
+     
+     
+     this.setState({usersPortfolio: userPortfolio});
+     console.log(this.state.listInfo);
         })
         .catch(function (error) {
             alert('Error with api call ... error=' + error);
@@ -34,6 +63,8 @@ class SingleUser extends Component {
         .catch(function (error) {
             alert('Error with api call ... error=' + error);
         });
+     
+     
      
  }
  
@@ -100,7 +131,7 @@ class SingleUser extends Component {
                     <UserDetails users={this.state.users} usersSummary = {this.state.usersSummary}/>
                 )}
                 { this.state.portfolioActive && (
-                    <UserPortfolio userid={this.props.match.params.id} />
+                    <UserPortfolio usersPortfolio={this.state.usersPortfolio} />
                 )}
                 
             </div>    

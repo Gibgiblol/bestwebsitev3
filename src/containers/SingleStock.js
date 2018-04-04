@@ -40,6 +40,8 @@ class SingleStock extends Component {
         .catch(function (error) {
             alert('Error with api call ... error=' + error);
         });
+     
+     
  }
  
  summaryActive() {
