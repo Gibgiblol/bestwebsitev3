@@ -10,6 +10,7 @@ class SingleUser extends Component {
     super(props);
     this.state = {
         users: [],
+        usersSummary: [],
         detailsActive: true,
         detailsClass: "is-active",
         portfolioActive: false,
@@ -20,13 +21,20 @@ class SingleUser extends Component {
  }
  
  componentDidMount() {
-    // Here we are using the Axios package to retrieve "dummy" API data
-    axios.get('https://jsonplaceholder.typicode.com/users/' + this.props.match.params.id).then(response => {
+    // Here we are using the Axios to retrieve all the user info needed for summary
+    axios.get('https://bestdatabasev2.herokuapp.com/api/portfolio/' + this.props.match.params.id).then(response => {
             this.setState({users: response.data});
         })
         .catch(function (error) {
             alert('Error with api call ... error=' + error);
         });
+     axios.get('http://bestdatabasev2.herokuapp.com/api/portfoliosum/' + this.props.match.params.id).then(response => {
+            this.setState({usersSummary: response.data});
+        })
+        .catch(function (error) {
+            alert('Error with api call ... error=' + error);
+        });
+     
  }
  
  detailsActive() {
@@ -67,8 +75,7 @@ class SingleUser extends Component {
                 <nav className="breadcrumb has-succeeds-separator" aria-label="breadcrumbs">
                   <ul>
                     <li><NavLink to="/home">Home</NavLink></li>
-                    <li><NavLink to="/users">Users</NavLink></li>
-                    <li className="is-active"><a href="" aria-current="page">User</a></li>
+                    <li className="is-active"><a href="" aria-current="page">Portfolio</a></li>
                   </ul>
                 </nav>
                 
@@ -78,19 +85,19 @@ class SingleUser extends Component {
                   <ul>
                     <li className={this.state.detailsClass} onClick={this.detailsActive}>
                       <a>
-                        <span>Details</span>
+                        <span>Summary</span>
                       </a>
                     </li>
                     <li className={this.state.portfolioClass} onClick={this.portfolioActive}>
                       <a>
-                        <span>Portfolio</span>
+                        <span>List</span>
                       </a>
                     </li>
                   </ul>
                 </div>
                 
                 { this.state.detailsActive && (
-                    <UserDetails users={this.state.users} />
+                    <UserDetails users={this.state.users} usersSummary = {this.state.usersSummary}/>
                 )}
                 { this.state.portfolioActive && (
                     <UserPortfolio userid={this.props.match.params.id} />

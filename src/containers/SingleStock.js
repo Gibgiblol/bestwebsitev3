@@ -20,7 +20,7 @@ class SingleStock extends Component {
     this.summaryActive = this.summaryActive.bind(this);
     this.listActive = this.listActive.bind(this);
  }
- 
+
  componentDidMount() {
    var stockCompare = this.props.match.params.symbol;
     this.setState({companySymbol: stockCompare});
@@ -80,8 +80,8 @@ class SingleStock extends Component {
                 <nav className="breadcrumb has-succeeds-separator" aria-label="breadcrumbs">
                   <ul>
                     <li><NavLink to="/home">Home</NavLink></li>
-                    <li><NavLink to="/stocks">Stocks</NavLink></li>
-                    <li className="is-active"><a href="" aria-current="page">Stock</a></li>
+                    <li><NavLink to="/companies">Companies</NavLink></li>
+                    <li className="is-active"><a href="" aria-current="page">Company</a></li>
                   </ul>
                 </nav>
                 

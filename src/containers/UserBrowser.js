@@ -42,7 +42,7 @@ class UserBrowser extends Component {
                 <nav className="breadcrumb has-succeeds-separator" aria-label="breadcrumbs">
                   <ul>
                     <li><NavLink to="/home">Home</NavLink></li>
-                    <li className="is-active"><a href="" aria-current="page">Users</a></li>
+                    <li className="is-active"><a href="" aria-current="page">Portfolio</a></li>
                   </ul>
                 </nav>  
                 

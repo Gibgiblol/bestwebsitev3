@@ -16,10 +16,10 @@ class App extends Component {
         <main >
           <Route path="/" exact component={Home} />
           <Route path="/home" exact component={Home} />
-          <Route path="/users" exact component={UserBrowser} />
-          <Route path="/stocks" exact component={StockBrowser} />
-          <Route path="/user/:id" exact component={SingleUser} />
-          <Route path="/stocks/:symbol" exact component={SingleStock} />
+          <Route path="/portfolio" exact component={UserBrowser} />
+          <Route path="/companies" exact component={StockBrowser} />
+          <Route path="/portfolio/:id" exact component={SingleUser} />
+          <Route path="/companies/:symbol" exact component={SingleStock} />
           <Route path="/about" exact component={AboutUs} />
         </main>
       </div>

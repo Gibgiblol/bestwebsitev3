@@ -22,8 +22,8 @@ class Home extends Component {
               </div>
               <div className="card-content">
                 <div className="content has-text-centered">
-                  Browse and edit the users in the system<br/>
-                  <NavLink className="button is-primary is-flex "to={ {pathname:"/users"} }>View Users</NavLink>
+                  Browse your portfolio in the system<br/>
+                  <NavLink className="button is-primary is-flex "to={ {pathname:"/portfolio/1"} }>View Portfolio</NavLink>
                 </div>
               </div>
             </div>
@@ -36,8 +36,8 @@ class Home extends Component {
               </div>
               <div className="card-content">
                 <div className="content has-text-centered">
-                  View current stocks<br/>
-                  <NavLink className="button is-primary is-flex "to={ {pathname:"/stocks"} }>View Stocks</NavLink>
+                  View current companies<br/>
+                  <NavLink className="button is-primary is-flex "to={ {pathname:"/companies"} }>View Companies</NavLink>
                 </div>
               </div>
             </div>

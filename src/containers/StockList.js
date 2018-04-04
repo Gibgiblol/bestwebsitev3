@@ -36,7 +36,7 @@ class StockList extends Component {
         
      }
     render() {
-         ;
+         
         
         return ( 
             <div>

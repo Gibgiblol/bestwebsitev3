@@ -33,7 +33,7 @@ class StockBrowser extends Component {
                 <nav className="breadcrumb has-succeeds-separator" aria-label="breadcrumbs">
                   <ul>
                     <li><NavLink to="/home">Home</NavLink></li>
-                    <li className="is-active"><a href="" aria-current="page">Stocks</a></li>
+                    <li className="is-active"><a href="" aria-current="page">Companies</a></li>
                   </ul>
                 </nav>  
                 
@@ -44,7 +44,7 @@ class StockBrowser extends Component {
                         {stocks.map((obj) =>
                             <tr>
                                 <td><img className="stockImages" src={"/logos/"+ obj.symbol + ".svg"} alt="" /></td>
-                                <td><NavLink to={"/stocks/" + obj.symbol}>{obj.name}</NavLink></td>
+                                <td><NavLink to={"/companies/" + obj.symbol}>{obj.name}</NavLink></td>
                             </tr>
                         )}
                         

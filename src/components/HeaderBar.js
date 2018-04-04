@@ -58,24 +58,24 @@ class HeaderBar extends Component {
                             
                             <div className="navbar-dropdown is-right">
                               <hr className="dropdown-divider" />
-                              <NavLink className="navbar-item dropdown0" to={ {pathname:"/users"} }>
+                              <NavLink className="navbar-item dropdown0" to={ {pathname:"/"} }>
                                 <strong>Home</strong>
                                 <br/>
                                 Return to homepage
                                 <br/>
                               </NavLink>
                                <hr className="dropdown-divider" />
-                              <NavLink className="navbar-item dropdown1" to={ {pathname:"/users"} }>
+                              <NavLink className="navbar-item dropdown1" to={ {pathname:"/portfolio/1"} }>
                                 <strong>Users</strong>
                                 <br/>
-                                Browse the users in our system
+                                Browse your portfolio in our system
                                 <br/>
                               </NavLink>
                                <hr className="dropdown-divider"/>
-                              <NavLink className="navbar-item dropdown2" to={ {pathname:"/stocks"} }>
+                              <NavLink className="navbar-item dropdown2" to={ {pathname:"/companies"} }>
                                 <strong>Stocks</strong>
                                 <br/>
-                                Browse the stocks in our system
+                                Browse the companies in our system
                                 <br/>
                               </NavLink>
                               <hr className="dropdown-divider" />
