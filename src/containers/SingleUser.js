@@ -28,7 +28,7 @@ class SingleUser extends Component {
         .catch(function (error) {
             alert('Error with api call ... error=' + error);
         });
-     axios.get('http://bestdatabasev2.herokuapp.com/api/portfoliosum/' + this.props.match.params.id).then(response => {
+     axios.get('https://bestdatabasev2.herokuapp.com/api/portfoliosum/' + this.props.match.params.id).then(response => {
             this.setState({usersSummary: response.data});
         })
         .catch(function (error) {
