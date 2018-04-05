@@ -70,7 +70,7 @@ componentDidMount() {
                         data={this.state.usersSummary}
                        clickHandler={
           (d) => this.setState({
-            dataDisplay: `The value of ${d.data.key} is ${d.value}`
+            dataDisplay: `The value of ${d.data.key} is ${d.value}%`
           })
         }
                         

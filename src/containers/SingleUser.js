@@ -96,7 +96,7 @@ class SingleUser extends Component {
 
  render() {
     
-    if (!this.state.users || this.state.users.length === 0) {
+    if (!this.state.usersSummary || this.state.usersSummary.length === 0) {
         return null;
     } else { 
         
