@@ -3,6 +3,7 @@ import axios from 'axios';
 import { NavLink } from "react-router-dom";
 import {LineChart} from 'react-easy-chart';
 import Dimensions from 'react-dimensions';
+import ToolTip from '../ToolTip';
 
 class StockList extends Component {
     
@@ -24,10 +25,15 @@ class StockList extends Component {
         this.changeCompany1 = this.changeCompany1.bind(this);
         this.changeCompany2 = this.changeCompany2.bind(this);
         this.changeCompany3 = this.changeCompany3.bind(this);
+        
         this.updateCompany1 = this.updateCompany1.bind(this);
         this.updateCompany2 = this.updateCompany2.bind(this);
         this.updateCompany3 = this.updateCompany3.bind(this);
         
+        this.mouseOverHandler = this.mouseOverHandler.bind(this);
+        this.mouseOutHandler = this.mouseOutHandler.bind(this);
+        this.mouseMoveHandler = this.mouseMoveHandler.bind(this);
+
     }
     
     componentDidMount() {
@@ -186,7 +192,39 @@ class StockList extends Component {
         
     }
     
-    
+      mouseOverHandler(d, e) {
+    this.setState({
+      showToolTip: true,
+      top: `${e.y - 10}px`,
+      left: `${e.x + 10}px`,
+      y: d.y,
+      x: d.x});
+          console.log(e.screenY);
+  }
+
+  mouseMoveHandler(e) {
+    if (this.state.showToolTip) {
+      this.setState({top: e.y, left: e.x});
+    }
+  }
+
+  mouseOutHandler() {
+    this.setState({showToolTip: false});
+  }
+
+  createTooltip() {
+    if (this.state.showToolTip) {
+      return (
+        <ToolTip
+          top={this.state.top}
+          left={this.state.left}
+        >
+            The date is {this.state.x} and the closing value is {this.state.y}
+        </ToolTip>
+      );
+    }
+    return false;
+  }
     
     render() {
      
@@ -260,7 +298,12 @@ class StockList extends Component {
                 
             <LineChart
                 axes
+                dataPoints
+                mouseOverHandler={this.mouseOverHandler}
+                
+                mouseMoveHandler={this.mouseMoveHandler}
                 xType={'text'}
+                lineColors={['blue', 'green', 'red']}
                 margin={{top: 10, right: 10, bottom: 50, left: 50}}
                 axisLabels={{x: 'Dates', y: 'Money'}}
                 width={this.props.containerWidth * 0.9}
@@ -270,7 +313,9 @@ class StockList extends Component {
                 
                 
               />
+              
             </div>
+         {this.createTooltip()}     
         </div>
             
 
