@@ -6,6 +6,7 @@ import StockBrowser from './containers/StockBrowser.js';
 import SingleUser from './containers/SingleUser.js';
 import Home from './containers/Home.js';
 import SingleStock from "./containers/SingleStock.js";
+import StockVisualizer from "./containers/StockVisualizer.js";
 import AboutUs from "./containers/AboutUs.js";
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
           <Route path="/companies" exact component={StockBrowser} />
           <Route path="/portfolio/:id" exact component={SingleUser} />
           <Route path="/companies/:symbol" exact component={SingleStock} />
+          <Route path="/stockvisualizer" exact component={StockVisualizer} />
           <Route path="/about" exact component={AboutUs} />
         </main>
       </div>

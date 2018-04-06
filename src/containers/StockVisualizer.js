@@ -1,50 +1,210 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { NavLink } from "react-router-dom";
+import {LineChart} from 'react-easy-chart';
+import Dimensions from 'react-dimensions';
 
 class StockList extends Component {
     
     constructor(props) {
         super(props);
         this.state = {
-            symbol: this.props.companySymbol,
-            selected: "select",
+            symbol: [],
+            selected: "01",
+            selectedC1: "",
+            comaniesData: [],
+            selectedCompany1: [],
+            selectedCompany2: [],
+            selectedCompany3: [],
             currentMonth: []
         }
         
+        this.data = [];
         this.changeMonth = this.changeMonth.bind(this);
+        this.changeCompany1 = this.changeCompany1.bind(this);
+        this.changeCompany2 = this.changeCompany2.bind(this);
+        this.changeCompany3 = this.changeCompany3.bind(this);
+        this.updateCompany1 = this.updateCompany1.bind(this);
+        this.updateCompany2 = this.updateCompany2.bind(this);
+        this.updateCompany3 = this.updateCompany3.bind(this);
+        
     }
     
     componentDidMount() {
+      
         
+        axios.get('http://localhost:5000/api/company').then(response => {      
+            this.setState({comaniesData: response.data});
+        })
+        .catch(function (error) {
+            alert('Error with api call ... error=' + error);
+        });
     }
+    
+    //When user selects different month, update all chart values to match month with current selected companies
     changeMonth(event){
          this.setState({selected: event.target.value});
+         
+         let changeMonth = event.target.value;
+         this.updateCompany1(event.target.value);
+        this.updateCompany2(event.target.value);
+        this.updateCompany3(event.target.value);
         
-        axios.get('https://bestdatabasev2.herokuapp.com/api/price/month/'+this.state.symbol+'/'+event.target.value).then(response => { 
+     }
+    
+    //On first dropdown list change, requery for new company and update line chart
+    changeCompany1(event) {
+            this.setState({selectedC1: event.target.value});
+        
+        
+        console.log(this.state.selected);
+        axios.get('http://localhost:5000/api/price/visual/'+event.target.value+'/'+this.state.selected).then(response => { 
             response.data.sort(function(a,b) {
-            if(a.date < b.date) return -1;
-            if(a.date > b.date) return 1;
+            if(a.x < b.x) return -1;
+            if(a.x > b.x) return 1;
             return 0;        
         })
             
-            this.setState({currentMonth: response.data});
+            this.data[0] = response.data;
+            this.forceUpdate();
         })
         .catch(function (error) {
             alert('Error with api call ... error=' + error);
         });
         
         
-     }
-    render() {
-         
         
+    }
+    
+    //On first dropdown list change, requery for new month and update line chart
+    updateCompany1(newMonth) {
+
+            let getSymbol = this.state.selectedC1;
+        
+      
+        axios.get('http://localhost:5000/api/price/visual/'+getSymbol+'/'+newMonth).then(response => { 
+            response.data.sort(function(a,b) {
+            if(a.x < b.x) return -1;
+            if(a.x > b.x) return 1;
+            return 0;        
+        })
+            
+            this.data[0] = response.data;
+            this.forceUpdate();
+        })
+        .catch(function (error) {
+            alert('Error with api call ... error=' + error);
+        });
+        
+        
+        
+    }
+    
+    //On second dropdown list change, requery for new company and update line chart
+    changeCompany2(event) {
+            this.setState({selectedC2: event.target.value});
+        
+        
+        axios.get('http://localhost:5000/api/price/visual/'+event.target.value+'/'+this.state.selected).then(response => { 
+            response.data.sort(function(a,b) {
+            if(a.x < b.x) return -1;
+            if(a.x > b.x) return 1;
+            return 0;        
+        })
+            
+            this.data[1] = response.data;
+            this.forceUpdate();
+        })
+        .catch(function (error) {
+            alert('Error with api call ... error=' + error);
+        });
+        
+    }
+    
+    //On second dropdown list change, requery for new month and update line chart
+    updateCompany2(newMonth) {
+
+            let getSymbol = this.state.selectedC2;
+        
+      
+        axios.get('http://localhost:5000/api/price/visual/'+getSymbol+'/'+newMonth).then(response => { 
+            response.data.sort(function(a,b) {
+            if(a.x < b.x) return -1;
+            if(a.x > b.x) return 1;
+            return 0;        
+        })
+            
+            this.data[1] = response.data;
+            this.forceUpdate();
+        })
+        .catch(function (error) {
+            alert('Error with api call ... error=' + error);
+        });
+        
+    }
+      
+    
+    changeCompany3(event) {
+            this.setState({selectedC3: event.target.value});
+        
+        axios.get('http://localhost:5000/api/price/visual/'+event.target.value+'/'+this.state.selected).then(response => { 
+            response.data.sort(function(a,b) {
+            if(a.x < b.x) return -1;
+            if(a.x > b.x) return 1;
+            return 0;        
+        })
+            
+            this.data[2] = response.data;
+            this.forceUpdate();
+        })
+        .catch(function (error) {
+            alert('Error with api call ... error=' + error);
+        });
+        
+    }
+        
+            //On third dropdown list change, requery for new month and update line chart
+    updateCompany3(newMonth) {
+
+            let getSymbol = this.state.selectedC3;
+        
+      
+        axios.get('http://localhost:5000/api/price/visual/'+getSymbol+'/'+newMonth).then(response => { 
+            response.data.sort(function(a,b) {
+            if(a.x < b.x) return -1;
+            if(a.x > b.x) return 1;
+            return 0;        
+        })
+            
+            this.data[2] = response.data;
+            this.forceUpdate();
+        })
+        .catch(function (error) {
+            alert('Error with api call ... error=' + error);
+        });
+        
+        
+    }
+    
+    
+    
+    render() {
+     
+         
         return ( 
             <div>
+            <nav className="breadcrumb has-succeeds-separator" aria-label="breadcrumbs">
+                  <ul>
+                    <li><NavLink to="/home">Home</NavLink></li>
+                    <li className="is-active"><a href="" aria-current="page">Stock Visualizer</a></li>
+                  </ul>
+                </nav>
+            
+           
             <div className="field has-addons">
          <div className="control is-expanded">
-            <div className="select is-fullwidth" id="selectMonth" placeholder="Month" onChange={this.changeMonth} value={this.state.value}>
+            <div className="select is-fullwidth is-primary" id="selectMonth" placeholder="Month" onChange={this.changeMonth} value={this.state.value}>
                   <select>
-                    <option>Select Month</option>
                     <option value="01">Janurary</option>
                     <option value="02">Feburary</option>
                     <option value="03">March</option>
@@ -61,39 +221,64 @@ class StockList extends Component {
                 </div>
             </div>
             
+            
+            <div className="control is-expanded">
+            <div className="select is-fullwidth is-info" id="selectCompany1" placeholder="Company" onChange={this.changeCompany1} value={this.state.value}>
+                  <select>
+                    <option>Select Company</option>
+                    {this.state.comaniesData.map((obj) =>
+                    <option value={obj.symbol}>{obj.name}</option>
+                    )}
+                  </select>
+                </div>
+            </div>
+            
+            <div className="control is-expanded">
+            <div className="select is-fullwidth is-success" id="selectCompany2" placeholder="Company" onChange={this.changeCompany2} value={this.state.value}>
+                  <select>
+                    <option>Select Company</option>
+            {this.state.comaniesData.map((obj) =>
+                    <option value={obj.symbol}>{obj.name}</option>
+                    )}
+                  </select>
+                </div>
+            </div>
+            
+            <div className="control is-expanded">
+            <div className="select is-fullwidth is-danger" id="selectCompany3" placeholder="Company" onChange={this.changeCompany3} value={this.state.value}>
+                  <select>
+                    <option>Select Company</option>
+                    {this.state.comaniesData.map((obj) =>
+                    <option value={obj.symbol}>{obj.name}</option>
+                    )}
+                  </select>
+                </div>
+            </div>
+            
         </div>
         <div>
-            <table className="table is-fullwidth">
-                <thead>
-                    <tr>
-                        <th> Date </th>
-                        <th> Open </th>
-                        <th> High </th>
-                        <th> Low </th>
-                        <th> Close </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.state.currentMonth.map((obj) =>
-                        <tr>
-                            <td>{obj.date}</td>
-                            <td>${obj.open}</td>
-                            <td>${obj.high}</td>
-                            <td>${obj.low}</td>
-                            <td>${obj.close}</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
+                
+            <LineChart
+                axes
+                xType={'text'}
+                margin={{top: 10, right: 10, bottom: 50, left: 50}}
+                axisLabels={{x: 'Dates', y: 'Money'}}
+                width={this.props.containerWidth * 0.9}
+                height={this.props.containerWidth * 0.9/2}
+                
+            data={ this.data }
+                
+                
+              />
             </div>
         </div>
             
 
             
         );
-    
+
         
     }
 }
 
-export default StockList;
+export default Dimensions()(StockList);

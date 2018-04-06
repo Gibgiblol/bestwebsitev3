@@ -12,7 +12,6 @@ class SingleUser extends Component {
         users: [],
         usersSummary: [],
         usersPortfolio: [],
-        listInfo: [],
         detailsActive: true,
         detailsClass: "is-active",
         portfolioActive: false,
@@ -24,6 +23,13 @@ class SingleUser extends Component {
  
  componentDidMount() {
       let userPortfolio = [];
+     
+          axios.get('https://bestdatabasev2.herokuapp.com/api/portfoliosum/' + this.props.match.params.id).then(response => {
+            this.setState({usersSummary: response.data});
+        })
+        .catch(function (error) {
+            alert('Error with api call ... error=' + error);
+        });
      
     // Here we are using the Axios to retrieve all the user info needed for summary
     axios.get('https://bestdatabasev2.herokuapp.com/api/portfolio/' + this.props.match.params.id).then(response => {
@@ -52,17 +58,12 @@ class SingleUser extends Component {
      
      
      this.setState({usersPortfolio: userPortfolio});
-     console.log(this.state.listInfo);
+   
         })
         .catch(function (error) {
             alert('Error with api call ... error=' + error);
         });
-     axios.get('https://bestdatabasev2.herokuapp.com/api/portfoliosum/' + this.props.match.params.id).then(response => {
-            this.setState({usersSummary: response.data});
-        })
-        .catch(function (error) {
-            alert('Error with api call ... error=' + error);
-        });
+
      
      
      

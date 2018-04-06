@@ -12,6 +12,7 @@ class UserDetails extends Component {
         usersSummary: this.props.usersSummary,
         totalStocks: 0,
         totalWorth: 0,
+        mounted: false
         
     };
     
@@ -38,17 +39,17 @@ componentDidMount() {
     
      
     this.setState({totalStocks: tempStock}); 
+    this.setState({mounted: true});
     
 }
+    
     
 
  
  render() {
-     if (!this.state.usersSummary || this.state.usersSummary.length === 0) {
+     if (!this.state.mounted) {
         return null;
     } else {         
-         
-     
         
         return (
             
