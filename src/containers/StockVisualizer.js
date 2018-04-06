@@ -33,7 +33,7 @@ class StockList extends Component {
     componentDidMount() {
       
         
-        axios.get('http://localhost:5000/api/company').then(response => {      
+        axios.get('https://bestdatabasev2.herokuapp.com/api/company').then(response => {      
             this.setState({comaniesData: response.data});
         })
         .catch(function (error) {
@@ -58,7 +58,7 @@ class StockList extends Component {
         
         
         console.log(this.state.selected);
-        axios.get('http://localhost:5000/api/price/visual/'+event.target.value+'/'+this.state.selected).then(response => { 
+        axios.get('https://bestdatabasev2.herokuapp.com/api/price/visual/'+event.target.value+'/'+this.state.selected).then(response => { 
             response.data.sort(function(a,b) {
             if(a.x < b.x) return -1;
             if(a.x > b.x) return 1;
@@ -82,7 +82,7 @@ class StockList extends Component {
             let getSymbol = this.state.selectedC1;
         
       
-        axios.get('http://localhost:5000/api/price/visual/'+getSymbol+'/'+newMonth).then(response => { 
+        axios.get('https://bestdatabasev2.herokuapp.com/api/price/visual/'+getSymbol+'/'+newMonth).then(response => { 
             response.data.sort(function(a,b) {
             if(a.x < b.x) return -1;
             if(a.x > b.x) return 1;
@@ -105,7 +105,7 @@ class StockList extends Component {
             this.setState({selectedC2: event.target.value});
         
         
-        axios.get('http://localhost:5000/api/price/visual/'+event.target.value+'/'+this.state.selected).then(response => { 
+        axios.get('https://bestdatabasev2.herokuapp.com/api/price/visual/'+event.target.value+'/'+this.state.selected).then(response => { 
             response.data.sort(function(a,b) {
             if(a.x < b.x) return -1;
             if(a.x > b.x) return 1;
@@ -127,7 +127,7 @@ class StockList extends Component {
             let getSymbol = this.state.selectedC2;
         
       
-        axios.get('http://localhost:5000/api/price/visual/'+getSymbol+'/'+newMonth).then(response => { 
+        axios.get('https://bestdatabasev2.herokuapp.com/api/price/visual/'+getSymbol+'/'+newMonth).then(response => { 
             response.data.sort(function(a,b) {
             if(a.x < b.x) return -1;
             if(a.x > b.x) return 1;
@@ -147,7 +147,7 @@ class StockList extends Component {
     changeCompany3(event) {
             this.setState({selectedC3: event.target.value});
         
-        axios.get('http://localhost:5000/api/price/visual/'+event.target.value+'/'+this.state.selected).then(response => { 
+        axios.get('https://bestdatabasev2.herokuapp.com/api/price/visual/'+event.target.value+'/'+this.state.selected).then(response => { 
             response.data.sort(function(a,b) {
             if(a.x < b.x) return -1;
             if(a.x > b.x) return 1;
@@ -169,7 +169,7 @@ class StockList extends Component {
             let getSymbol = this.state.selectedC3;
         
       
-        axios.get('http://localhost:5000/api/price/visual/'+getSymbol+'/'+newMonth).then(response => { 
+        axios.get('https://bestdatabasev2.herokuapp.com/api/price/visual/'+getSymbol+'/'+newMonth).then(response => { 
             response.data.sort(function(a,b) {
             if(a.x < b.x) return -1;
             if(a.x > b.x) return 1;
