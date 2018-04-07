@@ -126,10 +126,13 @@ class LoginPage extends Component {
                     this.setState({ redirectToReferrer: true });
                 });
         }
+        else {
+            alert("Password Incorrect");
+        }
             console.log(saltedPass);
         })
         .catch(function (error) {
-            alert('Error with api call ... error=' + error);
+            alert('Invalid email address');
         });      
     
   };
