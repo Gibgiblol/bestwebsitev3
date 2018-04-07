@@ -63,7 +63,7 @@ class StockList extends Component {
             this.setState({selectedC1: event.target.value});
         
         
-        console.log(this.state.selected);
+        
         axios.get('https://bestdatabasev2.herokuapp.com/api/price/visual/'+event.target.value+'/'+this.state.selected).then(response => { 
             response.data.sort(function(a,b) {
             if(a.x < b.x) return -1;
@@ -219,7 +219,7 @@ class StockList extends Component {
           top={this.state.top}
           left={this.state.left}
         >
-            The date is {this.state.x} and the closing value is {this.state.y}
+            The date is {this.state.x} and the closing value is ${this.state.y}
         </ToolTip>
       );
     }
@@ -231,6 +231,7 @@ class StockList extends Component {
          
         return ( 
             <div>
+            
             <nav className="breadcrumb has-succeeds-separator" aria-label="breadcrumbs">
                   <ul>
                     <li><NavLink to="/home">Home</NavLink></li>
@@ -238,7 +239,7 @@ class StockList extends Component {
                   </ul>
                 </nav>
             
-           
+            
             <div className="field has-addons">
          <div className="control is-expanded">
             <div className="select is-fullwidth is-primary" id="selectMonth" placeholder="Month" onChange={this.changeMonth} value={this.state.value}>
@@ -295,7 +296,7 @@ class StockList extends Component {
             
         </div>
         <div>
-                
+            {this.createTooltip()}     
             <LineChart
                 axes
                 dataPoints
@@ -315,7 +316,7 @@ class StockList extends Component {
               />
               
             </div>
-         {this.createTooltip()}     
+            
         </div>
             
 

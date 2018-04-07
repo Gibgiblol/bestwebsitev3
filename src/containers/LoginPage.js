@@ -1,16 +1,7 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router';
-import HeaderApp from './components/HeaderApp.js';
-import StockBrowser from './containers/StockBrowser.js';
-import SingleUser from './containers/SingleUser.js';
-import Home from './containers/Home.js';
-import SingleStock from "./containers/SingleStock.js";
-import StockVisualizer from "./containers/StockVisualizer.js";
-import AboutUs from "./containers/AboutUs.js";
-
 import {
-    
   BrowserRouter as Router,
+  Route,
   Link,
   Redirect,
   withRouter
@@ -28,24 +19,6 @@ const fakeAuth = {
   }
 };
 
-
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      fakeAuth.isAuthenticated ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{
-            pathname: "/login",
-            state: { from: props.location }
-          }}
-        />
-      )
-    }
-  />
-);
 
 const AuthButton = withRouter(
   ({ history }) =>
@@ -65,31 +38,6 @@ const AuthButton = withRouter(
     )
 );
 
-//Recreats app once login is fulfilled
-class App extends Component {
-    
-    
-  render() {
-      let loggedIn = true;
-    return (
-      <div>
-        <HeaderApp />
-        <main >
-          <PrivateRoute path="/" exact component={Home}/>
-          <PrivateRoute path="/home" exact component={Home} onEnter={this.authCheck}/>
-          <PrivateRoute path="/companies" exact component={StockBrowser} />
-          <PrivateRoute path="/portfolio/:id" exact component={SingleUser} />
-          <PrivateRoute path="/companies/:symbol" exact component={SingleStock} />
-          <PrivateRoute path="/stockvisualizer" exact component={StockVisualizer} />
-          <Route path="/login" exact component={LoginPage} />
-          <PrivateRoute path="/about" exact component={AboutUs} />
-        </main>
-      </div>
-    );
-  }
-}
-
-//Login Class to redirect components to
 class LoginPage extends Component {
 
        state = {
@@ -150,4 +98,4 @@ class LoginPage extends Component {
     }
 }
 
-export default App;
+export default LoginPage;
