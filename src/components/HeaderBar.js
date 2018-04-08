@@ -18,7 +18,7 @@ class HeaderBar extends Component {
         }
         this.showBurger = this.showBurger.bind(this);
         
-       this.socket = io('localhost:8080');
+       this.socket = io('https://msnremastered.herokuapp.com/');
 
         this.socket.on('RECEIVE_MESSAGE', function(data){
             addMessage(data);
