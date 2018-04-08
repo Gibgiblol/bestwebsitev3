@@ -3,9 +3,17 @@ import { NavLink } from "react-router-dom";
 
 class AboutUs extends Component {
     
+constructor(props) {
+        super(props);
+        this.state = { 
+            userInfo: this.props.myProp
+        }
+    }
+    
  render() {
     
-
+        console.log(this.state.userInfo);
+     
         
         return (
             <div>

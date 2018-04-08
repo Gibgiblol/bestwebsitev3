@@ -9,6 +9,8 @@ import SingleStock from "./containers/SingleStock.js";
 import StockVisualizer from "./containers/StockVisualizer.js";
 import AboutUs from "./containers/AboutUs.js";
 import axios from 'axios';
+import io from 'socket.io-client';
+
 
 //Redirect tutorial and code grabbed from https://reacttraining.com/react-router/web/example/auth-workflow
 //Router OnEnter function has been depreciated since V3 and installing it via npm installed the latest V4 version
@@ -22,6 +24,8 @@ import {
   withRouter
 } from "react-router-dom";
 
+
+
 const fakeAuth = {
   isAuthenticated: false,
   authenticate(cb) {
@@ -33,6 +37,20 @@ const fakeAuth = {
     setTimeout(cb, 100);
   }
 };
+
+const userInfo = {
+    userArray: [],
+    saveInfo (data) {
+        this.userArray = data;
+    }       
+};
+
+const messages = {
+    messagelog: 'test',
+    record(text) {
+        this.messagelog = text;
+    }
+}
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -52,36 +70,18 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 
-const AuthButton = withRouter(
-  ({ history }) =>
-    fakeAuth.isAuthenticated ? (
-      <p>
-        Welcome!{" "}
-        <button
-          onClick={() => {
-            fakeAuth.signout(() => history.push("/"));
-          }}
-        >
-          Sign out
-        </button>
-      </p>
-    ) : (
-      <p>You are not logged in.</p>
-    )
-);
-
 //Recreats app once login is fulfilled
 class App extends Component {
-    
-    
+
   render() {
-      let loggedIn = true;
+        
+    
     return (
       <div>
-        <HeaderApp />
+        <HeaderApp userInfo = {userInfo.userArray}/>
         <main >
           <PrivateRoute path="/" exact component={Home}/>
-          <PrivateRoute path="/home" exact component={Home} onEnter={this.authCheck}/>
+          <PrivateRoute path="/home" exact component={Home}/>
           <PrivateRoute path="/companies" exact component={StockBrowser} />
           <PrivateRoute path="/portfolio/:id" exact component={SingleUser} />
           <PrivateRoute path="/companies/:symbol" exact component={SingleStock} />
@@ -105,43 +105,46 @@ class LoginPage extends Component {
       };
         
      this.email = "";
-         this.handleLogin = this.handleLogin.bind(this);
+         this.handleLogin = this.handleLogin.bind(this);       
          this.handleChangeEmail = this.handleChangeEmail.bind(this);
          this.handleChangePassword = this.handleChangePassword.bind(this);
-     }
-  
 
+     }
+
+   
+  
+//Handles login request by querying user email, and authenticating through md5 hashing
   handleLogin(event) {
       
-      let saltedPass;
+    let saltedPass;
     event.preventDefault();
-     
+ 
     axios.get('https://bestdatabasev2.herokuapp.com/api/users/'+this.state.emailInput).then(response => { 
-        
-            
+                  
             saltedPass = this.state.passwordInput.concat(response.data[0].salt);
             saltedPass = md5(saltedPass, 'hex');
         if (saltedPass === response.data[0].password) {
             fakeAuth.authenticate(() => {
-                    this.setState({ redirectToReferrer: true });
+                    this.setState({ redirectToReferrer: true });      
                 });
+            userInfo.saveInfo(response.data);
         }
         else {
             alert("Password Incorrect");
-        }
-            console.log(saltedPass);
+        }       
         })
         .catch(function (error) {
             alert('Invalid email address');
-        });      
-    
-  };
+        });     
+  }
 
+    //Handles email input
     handleChangeEmail(event) {    
         this.setState({emailInput: event.target.value});
         
       }
     
+    //Handles password input
     handleChangePassword(event) {    
         this.setState({passwordInput: event.target.value});
         
@@ -150,12 +153,15 @@ class LoginPage extends Component {
 //Login page template created from https://github.com/dansup/bulma-templates/blob/master/templates/login.html
  render() {
 
+
+     
  const { from } = this.props.location.state || { from: { pathname: "/" } };
     const { redirectToReferrer } = this.state;
 
     if (redirectToReferrer) {
-      return <Redirect to={from} />;
+      return <Redirect to= {from} />;
     }
+     
         return (
 <section className="hero is-dark is-fullheight">
     <div className="hero-body">
@@ -187,7 +193,7 @@ class LoginPage extends Component {
         <button>Log in</button>
       </div>
   </section>
-         
+
         );
     
     
