@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import io from "socket.io-client";
 import Modal from 'react-responsive-modal';
+import NotificationSystem from 'react-notification-system';
 
 class HeaderBar extends Component {
     
@@ -14,19 +15,30 @@ class HeaderBar extends Component {
             open: false,
             username: '',
             message: '',
-            messages: []
+            messages: [],
+            _notificationSystem: null
         }
         this.showBurger = this.showBurger.bind(this);
+        this._addNotification = this._addNotification.bind(this);
         
        this.socket = io('https://msnremastered.herokuapp.com/');
 
         this.socket.on('RECEIVE_MESSAGE', function(data){
-            addMessage(data);
+                
+                addMessage(data);
+            
         });
 
         const addMessage = data => {
             console.log(data);
-            this.setState({messages: [...this.state.messages, data]});
+            if (this.state.open === true) {
+                this.setState({messages: [...this.state.messages, data]});
+            } else {
+                
+                this.setState({messages: [...this.state.messages, data]});
+                this._addNotification(data);
+            }
+            
             console.log(this.state.messages);
         };
 
@@ -40,6 +52,19 @@ class HeaderBar extends Component {
 
         }
     }
+    
+     componentDidMount() {
+        this._notificationSystem = this.refs.notificationSystem;
+    }
+    
+    _addNotification(msg) {
+    this._notificationSystem.addNotification({
+      message: msg.author + ": "+msg.message,
+      level: 'success',
+        autoDismiss: 1,
+        position: 'tc'
+    });
+  }
 
     //Modal is used for chat functionality, when you click button it will open up the chat modal
     //Modal is grabbed from https://react-responsive-modal.leopradel.com/
@@ -169,6 +194,7 @@ class HeaderBar extends Component {
                 </div>
             </div>
                 </Modal>
+            <NotificationSystem ref="notificationSystem" />
                 </div>
                 
             </nav>
