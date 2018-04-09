@@ -36,7 +36,7 @@ class UserPortfolio extends Component {
                 return 0;
             });
             this.setState({
-                usersPortfolio: this.usersPortfolio,
+                usersPortfolio: this.state.usersPortfolio,
                 sortSymbol: "desc"
             });
         } else {
@@ -46,7 +46,7 @@ class UserPortfolio extends Component {
                 return 0;                
             });
             this.setState({
-                usersPortfolio: this.usersPortfolio,
+                usersPortfolio: this.state.usersPortfolio,
                 sortSymbol: "asc"
             });
         }
@@ -62,7 +62,7 @@ class UserPortfolio extends Component {
                 return 0;
             });
             this.setState({
-                usersPortfolio: this.usersPortfolio,
+                usersPortfolio: this.state.usersPortfolio,
                 sortName: "desc"
             });
         } else {
@@ -72,7 +72,7 @@ class UserPortfolio extends Component {
                 return 0;                
             });
             this.setState({
-                usersPortfolio: this.usersPortfolio,
+                usersPortfolio: this.state.usersPortfolio,
                 sortName: "asc"
             });
         }
@@ -84,13 +84,13 @@ class UserPortfolio extends Component {
         if(this.state.sortAmount === "asc") {
             this.state.usersPortfolio.sort(function(a,b) {return a.amount - b.amount});
             this.setState({
-                usersPortfolio: this.usersPortfolio,
+                usersPortfolio: this.state.usersPortfolio,
                 sortAmount: "desc"
             });
         } else {
             this.state.usersPortfolio.sort(function(a,b) {return b.amount - a.amount});
             this.setState({
-                usersPortfolio: this.usersPortfolio,
+                usersPortfolio: this.state.usersPortfolio,
                 sortAmount: "asc"
             });
         }
@@ -102,13 +102,13 @@ class UserPortfolio extends Component {
         if(this.state.sortValue === "asc") {
             this.state.usersPortfolio.sort(function(a,b) {return a.value - b.value});
             this.setState({
-                usersPortfolio: this.usersPortfolio,
+                usersPortfolio: this.state.usersPortfolio,
                 sortValue: "desc"
             });
         } else {
             this.state.usersPortfolio.sort(function(a,b) {return b.value - a.value});
             this.setState({
-                usersPortfolio: this.usersPortfolio,
+                usersPortfolio: this.state.usersPortfolio,
                 sortValue: "asc"
             });
         }

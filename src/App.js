@@ -10,6 +10,7 @@ import StockVisualizer from "./containers/StockVisualizer.js";
 import AboutUs from "./containers/AboutUs.js";
 import axios from 'axios';
 import { Redirect} from "react-router-dom";
+import './App.scss';
 
 //Redirect tutorial and code grabbed from https://reacttraining.com/react-router/web/example/auth-workflow
 //Router OnEnter function has been depreciated since V3 and installing it via npm installed the latest V4 version
@@ -149,7 +150,7 @@ class LoginPage extends Component {
     <div className="hero-body">
       <div className="container is-light has-text-centered">
         <div className="column is-4 is-offset-4">
-          <h3 className="title has-text-grey">BitStocker Login</h3>
+          <h3>BitStocker Login</h3>
           <p className="subtitle has-text-grey">Please enter login information</p>
           <div className="box">
             <form onSubmit={this.handleLogin}>
