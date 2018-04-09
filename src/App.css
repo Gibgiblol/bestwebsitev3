@@ -58,8 +58,9 @@ td {
 
 .messages {
     height:300px;
-    overflow-y: scroll;
-    
+    overflow-y: auto;
+    background-image: url(https://www.onmsft.com/wp-content/uploads/2013/04/msn-messenger-1050x542.jpg);
+    background-size: 100% 100%;
     word-break: keep-all;
 }
 
