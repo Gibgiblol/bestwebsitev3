@@ -33,7 +33,7 @@ class HeaderBar extends Component {
               });
             
         const addMessage = data => {
-            console.log(data);
+            
             if (this.state.open === true) {
                 this.setState({messages: [...this.state.messages, data]});
             } else {
@@ -42,7 +42,7 @@ class HeaderBar extends Component {
                 this._addNotification(data);
             }
             
-            console.log(this.state.messages);
+            
         };
 
         this.sendMessage = ev => {
@@ -62,11 +62,12 @@ class HeaderBar extends Component {
 
     }
     
+    //Notification settings
     _addNotification(msg) {
     this._notificationSystem.addNotification({
       message: msg.author + ": "+msg.message,
       level: 'success',
-        autoDismiss: 1,
+        autoDismiss: 2,
         position: 'tc'
     });
   }
@@ -125,7 +126,7 @@ class HeaderBar extends Component {
                             this.props.userInfo[0] != null && 
                                 
                                 <div className="navbar-item">
-                                        <h1 className="title">Welcome {this.props.userInfo[0].first_name} {this.props.userInfo[0].last_name}</h1>
+                                        <h1 className="title is-hidden-mobile">Welcome {this.props.userInfo[0].first_name} {this.props.userInfo[0].last_name}</h1>
                                 </div>  
                         }
                     
@@ -201,14 +202,14 @@ class HeaderBar extends Component {
                     </div>
             }
              <Modal open={open} onClose={this.onCloseModal} little>
-                  <h2>Simple centered modal</h2>
-                    <div className="container">
-                <div className="row">
-                    <div className="col-4">
-                        <div className="card">
+                  <h2><span className="icon">
+                            <i className="fab fa-facebook-messenger"></i>
+                          </span>MSN Messenger</h2>
+                    <div className="chatBox container">
+                
+                   
+                        <div className="card chatHolder">
                             <div className="card-body">
-                                <div className="card-title">Global Chat</div>
-                                <hr/>
                                 <div className="messages">
                                     {this.state.messages.map(message => {
                                         return (
@@ -221,14 +222,14 @@ class HeaderBar extends Component {
                             <div className="card-footer">
                                 <br/>
                                 <form onSubmit={this.sendMessage}>
-                                <input type="text" placeholder="Message" className="form-control" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})} />
+                                <input type="text" placeholder="Message" className="form-control chatArea" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})} />
                                 
                                 <button className="btn btn-primary form-control">Send</button>
                                 </form>
                             </div>
                         </div>
-                    </div>
-                </div>
+                  
+                
             </div>
                 </Modal>
             <NotificationSystem ref="notificationSystem" />

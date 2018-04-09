@@ -51,10 +51,20 @@ class StockList extends Component {
     changeMonth(event){
          this.setState({selected: event.target.value});
          
+        if (this.data[0] != null) {
+            this.updateCompany1(event.target.value);
+        }
+        if (this.data[0] != null && this.data[1] != null) {
+            this.updateCompany1(event.target.value);
+            this.updateCompany2(event.target.value);
+        }
+        if (this.data[0] != null && this.data[1] != null && this.data[2] != null) {
+            this.updateCompany1(event.target.value);
+            this.updateCompany2(event.target.value);
+            this.updateCompany3(event.target.value);
+        }
         
-         this.updateCompany1(event.target.value);
-        this.updateCompany2(event.target.value);
-        this.updateCompany3(event.target.value);
+        
         
      }
     
@@ -270,6 +280,7 @@ class StockList extends Component {
                 </div>
             </div>
             
+                  {this.data[0] != null && 
             <div className="control is-expanded">
             <div className="select is-fullwidth is-success" id="selectCompany2" placeholder="Company" onChange={this.changeCompany2} value={this.state.value}>
                   <select>
@@ -280,7 +291,9 @@ class StockList extends Component {
                   </select>
                 </div>
             </div>
-            
+                  }
+                
+                {this.data[1] != null && 
             <div className="control is-expanded">
             <div className="select is-fullwidth is-danger" id="selectCompany3" placeholder="Company" onChange={this.changeCompany3} value={this.state.value}>
                   <select>
@@ -291,7 +304,7 @@ class StockList extends Component {
                   </select>
                 </div>
             </div>
-            
+                }
         </div>
         <div>
             {this.createTooltip()}     

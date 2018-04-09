@@ -43,6 +43,20 @@ class Home extends Component {
                 </div>
               </div>
             </div>
+        
+        <div className="card column ">
+              <div className="card-image">
+                <figure className="image is-4by3">
+                  <img src="https://placeimg.com/640/480/nature/grayscale" alt=""/>
+                </figure>
+              </div>
+              <div className="card-content">
+                <div className="content has-text-centered">
+                  View graph of companies<br/>
+                  <NavLink className="button is-primary is-flex "to={ {pathname:"/stockvisualizer"} }>View Stock Visualizer</NavLink>
+                </div>
+              </div>
+            </div>
             
             <div className="card column ">
               <div className="card-image">
