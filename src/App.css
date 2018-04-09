@@ -51,3 +51,34 @@ td {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+   .testTitle{
+      font-size: 50px;
+   }
+
+.messages {
+    height:300px;
+    overflow-y: scroll;
+    
+    word-break: keep-all;
+}
+
+.chatHolder {
+    word-break: keep-all;
+}
+
+.chatBox.container {
+    max-width: 100%;
+}
+
+.navbar.is-primary {
+    background-color:#209cee;
+}
+
+h1.title {
+    color:white;
+}
+
+.button.is-primary {
+     background-color:#209cee;
+}
