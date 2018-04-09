@@ -62,7 +62,7 @@ class App extends Component {
       <div>
         <HeaderApp userInfo = {userInfo.userArray}/>
         <main >
-          <Route path="/" exact component={Home}/>
+          <PrivateRoute path="/" exact component={Home}/>
           <PrivateRoute path="/home" exact component={Home}/>
           <PrivateRoute path="/companies" exact component={StockBrowser} />
           <PrivateRoute path="/portfolio/" exact component={SingleUser} />
