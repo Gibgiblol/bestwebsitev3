@@ -10,6 +10,7 @@ class SingleUser extends Component {
     super(props);
     this.state = {
         users: [],
+        userid: this.props.location.state.userid,
         usersSummary: [],
         usersPortfolio: [],
         detailsActive: true,
@@ -22,9 +23,11 @@ class SingleUser extends Component {
  }
  
  componentDidMount() {
-      let userPortfolio = [];
      
-          axios.get('https://bestdatabasev2.herokuapp.com/api/portfoliosum/' + this.props.match.params.id).then(response => {
+     
+      let userPortfolio = [];
+    
+          axios.get('https://bestdatabasev2.herokuapp.com/api/portfoliosum/' + this.props.userInfo[0].id).then(response => {
             this.setState({usersSummary: response.data});
         })
         .catch(function (error) {
@@ -32,7 +35,7 @@ class SingleUser extends Component {
         });
      
     // Here we are using the Axios to retrieve all the user info needed for summary
-    axios.get('https://bestdatabasev2.herokuapp.com/api/portfolio/' + this.props.match.params.id).then(response => {
+    axios.get('https://bestdatabasev2.herokuapp.com/api/portfolio/' + this.props.userInfo[0].id).then(response => {
             this.setState({users: response.data});
                 //Axios call first to get company info (name and symbol)
         response.data.forEach(function(filteredStockPortfolio) {

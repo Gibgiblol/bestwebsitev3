@@ -51,7 +51,7 @@ class StockList extends Component {
     changeMonth(event){
          this.setState({selected: event.target.value});
          
-         let changeMonth = event.target.value;
+        
          this.updateCompany1(event.target.value);
         this.updateCompany2(event.target.value);
         this.updateCompany3(event.target.value);
@@ -195,11 +195,11 @@ class StockList extends Component {
       mouseOverHandler(d, e) {
     this.setState({
       showToolTip: true,
-      top: `${e.y - 10}px`,
-      left: `${e.x + 10}px`,
+      top: '{e.y}',
+      left: `{e.x + 10}px`,
       y: d.y,
       x: d.x});
-          console.log(e.screenY);
+          console.log(this.state.top);
   }
 
   mouseMoveHandler(e) {
@@ -216,8 +216,8 @@ class StockList extends Component {
     if (this.state.showToolTip) {
       return (
         <ToolTip
-          top={this.state.top}
-          left={this.state.left}
+          top="500"
+          left="600"
         >
             The date is {this.state.x} and the closing value is ${this.state.y}
         </ToolTip>
@@ -301,7 +301,7 @@ class StockList extends Component {
                 axes
                 dataPoints
                 mouseOverHandler={this.mouseOverHandler}
-                
+                mouseOutHandler={this.mouseOutHandler}
                 mouseMoveHandler={this.mouseMoveHandler}
                 xType={'text'}
                 lineColors={['blue', 'green', 'red']}

@@ -8,9 +8,11 @@ class Home extends Component {
     this.state = {
         home: []
     };
+     
  }
 
  render() {
+    
     return (
         <article className="section columns">
              <div className="card column ">
@@ -23,7 +25,7 @@ class Home extends Component {
               <div className="card-content">
                 <div className="content has-text-centered">
                   Browse your portfolio in the system<br/>
-                  <NavLink className="button is-primary is-flex "to={ {pathname:"/portfolio/"} }>View Portfolio</NavLink>
+                  <NavLink className="button is-primary is-flex "to={ {pathname:"/portfolio/", state: {userid: 22} }}>View Portfolio</NavLink>
                 </div>
               </div>
             </div>

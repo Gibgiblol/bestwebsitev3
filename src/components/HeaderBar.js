@@ -51,6 +51,18 @@ class HeaderBar extends Component {
             this.setState({message: ''});
 
         }
+        
+        this.sendMessageEnter = ev => {
+            ev.preventDefault();
+            if (ev.key === 'Enter') {
+            this.socket.emit('SEND_MESSAGE', {
+                author: this.props.userInfo[0].first_name,
+                message: this.state.message
+            })
+            this.setState({message: ''});
+            }
+
+        }
     }
     
      componentDidMount() {
@@ -105,29 +117,38 @@ class HeaderBar extends Component {
                             <i className="fab fa-lg fa-btc"></i>
                         </span>
                     </a>
-                    <a className="navbar-item">
+                    <span className="navbar-item">
                         <h1 className="title">BitStocker</h1>
-                    </a>
+                    </span>
                         {
                             this.props.userInfo[0] != null && 
-                                <div className="navbar-item is-right">
+                                <div className="navbar-item">
                                         <h1 className="title">Welcome {this.props.userInfo[0].first_name} {this.props.userInfo[0].last_name}</h1>
-                                        <button onClick={this.onOpenModal}>Open modal</button>
-           
-                                </div>
-                                
-                          
+                                </div>  
                         }
                     
                     <div className="navbar-burger" ref="burger" onClick={this.showBurger}>
                         <span />     
                         <span />
                         <span />
+                        <span />
                     </div>
                 </div>
-                
-                <div className={this.state.navMenuClass} ref="navMenu">
-                    <div className="navbar-end">
+                <div className="navbar-end">
+                    <div className="navbar-item">
+                        
+                      <p class="control">
+                        <a class="button is-primary" onClick={this.onOpenModal}>
+                          <span class="icon">
+                            <i class="fas fa-comment-alt"></i>
+                          </span>
+                            <span>Open Chat</span>
+                          
+                        </a>
+                      </p>
+                    </div>
+            
+                      <div className={this.state.navMenuClass} ref="navMenu">
                         <div className="navbar-item has-dropdown is-hoverable">
                             <a className="navbar-link">
                                <strong>Users Stock Portfolio Viewer</strong>
@@ -142,7 +163,7 @@ class HeaderBar extends Component {
                                 <br/>
                               </NavLink>
                                <hr className="dropdown-divider" />
-                              <NavLink className="navbar-item dropdown1" to={ {pathname:"/portfolio/"} }>
+                              <NavLink className="navbar-item dropdown1" to={ {pathname:"/portfolio/"} } >
                                 <strong>Users</strong>
                                 <br/>
                                 Browse your portfolio in our system
@@ -154,9 +175,16 @@ class HeaderBar extends Component {
                                 <br/>
                                 Browse the companies in our system
                                 <br/>
+                                </NavLink>
+                               <hr className="dropdown-divider"/>
+                              <NavLink className="navbar-item dropdown3" to={ {pathname:"/stockvisualizer"} }>
+                                <strong>Stock Visualizer</strong>
+                                <br/>
+                                Compare companies to each other monthly
+                                <br/>
                               </NavLink>
                               <hr className="dropdown-divider" />
-                              <NavLink className="navbar-item dropdown3" to={ {pathname:"/about"} }>
+                              <NavLink className="navbar-item dropdown4" to={ {pathname:"/about"} }>
                                 <strong>About Us</strong>
                                 <br />
                                 Find out more about this system
@@ -185,9 +213,11 @@ class HeaderBar extends Component {
                             </div>
                             <div className="card-footer">
                                 <br/>
-                                <input type="text" placeholder="Message" className="form-control" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})}/>
-                                <br/>
-                                <button onClick={this.sendMessage} className="btn btn-primary form-control">Send</button>
+                                <form onSubmit={this.sendMessage}>
+                                <input type="text" placeholder="Message" className="form-control" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})} />
+                                
+                                <button className="btn btn-primary form-control">Send</button>
+                                </form>
                             </div>
                         </div>
                     </div>

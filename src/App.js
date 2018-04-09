@@ -52,12 +52,13 @@ const messages = {
     }
 }
 
+//Prebuilt route that we use for redirects and passing our user data so other components can use it
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
       fakeAuth.isAuthenticated ? (
-        <Component {...props} />
+        <Component userInfo={userInfo.userArray} {...props} />
       ) : (
         <Redirect
           to={{
@@ -75,15 +76,14 @@ class App extends Component {
 
   render() {
         
-    
     return (
       <div>
         <HeaderApp userInfo = {userInfo.userArray}/>
         <main >
-          <PrivateRoute path="/" exact component={Home}/>
+          <Route path="/" exact component={Home}/>
           <PrivateRoute path="/home" exact component={Home}/>
           <PrivateRoute path="/companies" exact component={StockBrowser} />
-          <PrivateRoute path="/portfolio/:id" exact component={SingleUser} />
+          <PrivateRoute path="/portfolio/" exact component={SingleUser} />
           <PrivateRoute path="/companies/:symbol" exact component={SingleStock} />
           <PrivateRoute path="/stockvisualizer" exact component={StockVisualizer} />
           <Route path="/login" exact component={LoginPage} />
