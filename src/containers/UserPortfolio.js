@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { NavLink } from "react-router-dom";
 
 class UserPortfolio extends Component {
@@ -22,36 +21,7 @@ class UserPortfolio extends Component {
     }
     
     componentDidMount() {
-        this.mounted = true;
-//        const filteredStockPortfolio = this.state.usersPortfolio;
-//        
-//        let userPortfolio = [];
-//        
-//        //Axios call first to get company info (name and symbol)
-//        filteredStockPortfolio.forEach(function(filteredStockPortfolio) {
-//            axios.get('https://bestdatabasev2.herokuapp.com/api/company/' + filteredStockPortfolio.symbol).then(response => {
-//                //Axios call again to get latest price based on symbol
-//                axios.get('https://bestdatabasev2.herokuapp.com/api/latestprice/' + filteredStockPortfolio.symbol).then(response2 => {
-//                //Push everything into a stock array
-//                 userPortfolio.push({ symbol: response.data[0].symbol,
-//                                      name: response.data[0].name,
-//                                      amount: filteredStockPortfolio.owned,
-//                                      value: response2.data[0].close * filteredStockPortfolio.owned
-//                    });     
-//        })
-//        .catch(function (error) {
-//            alert('Error1 with api call ... error=' + error);
-//        });            
-//        })
-//        .catch(function (error) {
-//            alert('Error2 with api call ... error=' + error);
-//            });
-//        }); 
-        
-        
-//        this.tempArr = userPortfolio;
-//        this.setState({ tempArr: userPortfolio});
-        console.log(this.state.usersPortfolio);
+      
         this.setState ({mounted: true});
         
     }

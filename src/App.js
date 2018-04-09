@@ -9,22 +9,11 @@ import SingleStock from "./containers/SingleStock.js";
 import StockVisualizer from "./containers/StockVisualizer.js";
 import AboutUs from "./containers/AboutUs.js";
 import axios from 'axios';
-import io from 'socket.io-client';
-
+import { Redirect} from "react-router-dom";
 
 //Redirect tutorial and code grabbed from https://reacttraining.com/react-router/web/example/auth-workflow
 //Router OnEnter function has been depreciated since V3 and installing it via npm installed the latest V4 version
 //Redirect was the new way to do front end authentication, so code and tutorial was copied from the tutorial site
-
-import {
-    
-  BrowserRouter as Router,
-  Link,
-  Redirect,
-  withRouter
-} from "react-router-dom";
-
-
 
 const fakeAuth = {
   isAuthenticated: false,
@@ -44,13 +33,6 @@ const userInfo = {
         this.userArray = data;
     }       
 };
-
-const messages = {
-    messagelog: 'test',
-    record(text) {
-        this.messagelog = text;
-    }
-}
 
 //Prebuilt route that we use for redirects and passing our user data so other components can use it
 const PrivateRoute = ({ component: Component, ...rest }) => (

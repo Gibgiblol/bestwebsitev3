@@ -16,19 +16,22 @@ class HeaderBar extends Component {
             username: '',
             message: '',
             messages: [],
-            _notificationSystem: null
+            _notificationSystem: null,
+            checkUser: false
         }
         this.showBurger = this.showBurger.bind(this);
         this._addNotification = this._addNotification.bind(this);
         
        this.socket = io('https://msnremastered.herokuapp.com/');
 
-        this.socket.on('RECEIVE_MESSAGE', function(data){
-                
-                addMessage(data);
-            
+        this.socket.on('RECEIVE_MESSAGE', function(data){         
+                addMessage(data);     
         });
-
+  
+          this.socket.on('user joined', function (data) {
+                addMessage(data); 
+              });
+            
         const addMessage = data => {
             console.log(data);
             if (this.state.open === true) {
@@ -52,21 +55,11 @@ class HeaderBar extends Component {
 
         }
         
-        this.sendMessageEnter = ev => {
-            ev.preventDefault();
-            if (ev.key === 'Enter') {
-            this.socket.emit('SEND_MESSAGE', {
-                author: this.props.userInfo[0].first_name,
-                message: this.state.message
-            })
-            this.setState({message: ''});
-            }
-
-        }
     }
     
      componentDidMount() {
         this._notificationSystem = this.refs.notificationSystem;
+
     }
     
     _addNotification(msg) {
@@ -106,8 +99,15 @@ class HeaderBar extends Component {
         }
     }
     
+//Top header bar buttons on the right is hidden until user logs in
     render() {
         const { open } = this.state;
+        
+        if(this.props.userInfo[0] != null && this.state.checkUser !== true) {
+            this.socket.emit('add user', {author: this.props.userInfo[0].first_name, message: "has joined!"});
+            this.setState({checkUser: true});
+        }
+       
         
         return (
             <nav className="navbar is-primary">
@@ -120,8 +120,10 @@ class HeaderBar extends Component {
                     <span className="navbar-item">
                         <h1 className="title">BitStocker</h1>
                     </span>
+                        
                         {
                             this.props.userInfo[0] != null && 
+                                
                                 <div className="navbar-item">
                                         <h1 className="title">Welcome {this.props.userInfo[0].first_name} {this.props.userInfo[0].last_name}</h1>
                                 </div>  
@@ -135,19 +137,23 @@ class HeaderBar extends Component {
                     </div>
                 </div>
                 <div className="navbar-end">
+                {
+                        this.props.userInfo[0] != null &&
                     <div className="navbar-item">
                         
-                      <p class="control">
-                        <a class="button is-primary" onClick={this.onOpenModal}>
-                          <span class="icon">
-                            <i class="fas fa-comment-alt"></i>
+                      <p className="control">
+                        <a className="button is-primary" onClick={this.onOpenModal}>
+                          <span className="icon">
+                            <i className="fas fa-comment-alt"></i>
                           </span>
                             <span>Open Chat</span>
                           
                         </a>
                       </p>
                     </div>
-            
+                    }
+                    {
+                        this.props.userInfo[0] != null && 
                       <div className={this.state.navMenuClass} ref="navMenu">
                         <div className="navbar-item has-dropdown is-hoverable">
                             <a className="navbar-link">
@@ -163,7 +169,7 @@ class HeaderBar extends Component {
                                 <br/>
                               </NavLink>
                                <hr className="dropdown-divider" />
-                              <NavLink className="navbar-item dropdown1" to={ {pathname:"/portfolio/"} } >
+                              <NavLink className="navbar-item dropdown1" to={ {pathname:"/portfolio/", state: {userInfo: this.props.userInfo} } } >
                                 <strong>Users</strong>
                                 <br/>
                                 Browse your portfolio in our system
@@ -193,6 +199,7 @@ class HeaderBar extends Component {
                             </div>  
                         </div>
                     </div>
+            }
              <Modal open={open} onClose={this.onCloseModal} little>
                   <h2>Simple centered modal</h2>
                     <div className="container">

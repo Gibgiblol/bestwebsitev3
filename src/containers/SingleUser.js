@@ -20,6 +20,7 @@ class SingleUser extends Component {
     }
     this.detailsActive = this.detailsActive.bind(this);
     this.portfolioActive = this.portfolioActive.bind(this);
+    
  }
  
  componentDidMount() {
@@ -59,7 +60,7 @@ class SingleUser extends Component {
             });
         });
      
-     
+     console.log(userPortfolio);
      this.setState({usersPortfolio: userPortfolio});
    
         })

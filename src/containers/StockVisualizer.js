@@ -61,9 +61,7 @@ class StockList extends Component {
     //On first dropdown list change, requery for new company and update line chart
     changeCompany1(event) {
             this.setState({selectedC1: event.target.value});
-        
-        
-        
+            
         axios.get('https://bestdatabasev2.herokuapp.com/api/price/visual/'+event.target.value+'/'+this.state.selected).then(response => { 
             response.data.sort(function(a,b) {
             if(a.x < b.x) return -1;
